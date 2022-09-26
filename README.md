@@ -1,5 +1,7 @@
 # Getting Started with Technovium Unlimited API
 
+Make sure to run `npm install` after cloning the repository
+
 ## Available Scripts
 
 In the project directory, you can run:
