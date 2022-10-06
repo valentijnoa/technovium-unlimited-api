@@ -9,8 +9,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const routes = require("./server/routes/userRoutes.js");
-app.use("/", routes);
+const accountRoutes = require("./server/routes/accountRoutes.js");
+const levelRoutes = require("./server/routes/levelRoutes.js");
+app.use("/", accountRoutes, levelRoutes);
 
 app.get("/", (req, res) => {
   res.send("technovium unlimited api");
