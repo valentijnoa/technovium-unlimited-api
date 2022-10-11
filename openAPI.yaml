@@ -13,6 +13,10 @@ security:
   - bearerAuth: []
 
 paths:
+    ##
+    # Admin can see all information of the users -> except password
+    # add roles: user, creator and admin
+    ##
     /users:
         get:
             summary: Get all users
@@ -27,10 +31,16 @@ paths:
             security:
                 - basicAuth: []
             responses:
-                '200':
-                    description: 'Authenticated, you can browse all users TODO: can authanticated user get information of all users????'
-                '403': 
+                200:
+                    description: 'Authenticated, you can browse all users TODO: ONLY ADMIN can access this information; can authanticated user get information of all users????'
+                403: 
                     description: 'You do not have necessary permissions for the resource'
+
+
+    ##
+    # Admin can see all information of the user
+    # user or creator can see own information
+    ##
                 
     /users/{id}:
         get:
@@ -53,10 +63,11 @@ paths:
             security:
                 - basicAuth: []   
             responses:
-                '200':
+                200:
                     description: user results
-                '403': 
+                403: 
                     description: 'You do not have necessary permissions for the resource'
+    
                 
     /users/signup:
         post:
@@ -102,6 +113,12 @@ paths:
             responses:
                 '201':
                     description: email with an resetlink has been sennt to the user email address
+    
+    ##
+    # Admin can see all information of the users -> except password
+    # user or creatr can access his/her information
+    ##
+
     /users/settings: #add JWT security
         put:
             summary: User settings (email, pass etc.)
@@ -143,6 +160,10 @@ paths:
                     description: user settings recieved
                 '403': 
                     description: 'You do not have necessary permissions for the resource' 
+
+    ##
+    # user or creator can access and update his/her information
+    ##
     /users/game/latestLocation/{user_id}:
         post:
             summary: Add latest user location
@@ -191,6 +212,11 @@ paths:
                     description: recieved
                 403: 
                     description: 'You do not have necessary permissions for the resource'
+
+
+    ##
+    # user or creator can access and update his/her information
+    ##
     /users/game/score/{user_id}:
         get:
             summary: Get all scores of the user
@@ -217,6 +243,9 @@ paths:
                     description: created
                 403: 
                     description: 'You do not have necessary permissions for the resource'
+    ##
+    # user or creator can access and update his/her information
+    ##
     /users/game/level/{level_id}/success:
         post:
             summary: add achievement of the user -> see the schema of game and level -> game_id and level_id
@@ -241,6 +270,9 @@ paths:
                     description: score created
                 403: 
                     description: 'You do not have necessary permissions for the resource'
+    ##
+    # user or creator can access and update his/her information
+    ##
     /users/game/level/{level_id}/started:
         post:
             summary: Log started level
@@ -265,6 +297,8 @@ paths:
                     description: score updated to started
                 403: 
                     description: 'You do not have necessary permissions for the resource'
+
+    
     /games:
         get:
             summary: Get all games
