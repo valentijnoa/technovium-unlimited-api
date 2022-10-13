@@ -16,3 +16,19 @@ exports.getLevels = async (req, res) => {
         })
     }
 }
+
+/**
+ * /api/levels/:game_id
+ * GET all levels of the game
+ */
+
+exports.getGameLevels = async (req, res) => {
+    try {
+        const levels = await Level.find({game_id: req.params.game_id});
+        res.json(levels);
+    } catch (err) {
+        res.status(400).json({
+            message: err
+        })
+    }
+}
