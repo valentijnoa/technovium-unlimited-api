@@ -277,11 +277,11 @@ paths:
                     description: recieved 
     /levels:
         get:
-            summary: Get all levels of the game
-            description: Get all levels of the game
-            operationId: getAllLevelsOfGame
+            summary: Get all levels
+            description: Get all levels
+            operationId: getAllLevels
             requestBody:
-                description: Get all levels of one game
+                description: Get all levels
                 content:
                     'application/json':
                         schema:
