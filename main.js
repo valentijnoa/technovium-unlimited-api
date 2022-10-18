@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const userRoutes = require("./server/routes/userRoutes.js");
 const levelRoutes = require("./server/routes/levelRoutes.js");
+const gameRoutes = require("./server/routes/gameRoutes.js");
 app.use("/", userRoutes, levelRoutes);
 
 app.get("/", (req, res) => {
