@@ -75,7 +75,7 @@ paths:
     /users/login: #add JWT security
         post:
             summary: Loggin User
-            description: Returns token for authorized User
+            description: Log in and returns token for authorized user
             operationId: LogginUser
             requestBody:
                 description: Loggin user
@@ -86,6 +86,10 @@ paths:
             responses:
                 '200':
                     description: LoggedIn
+                '400':
+                    description: Email/Password wrong
+                '500':
+                    description: Server Error
     /users/resetpassword: #add JWT security
         post:
             summary: Reset password
