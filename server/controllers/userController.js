@@ -69,6 +69,35 @@ exports.createUser = async (req, res) => {
  */
 
 exports.loginUser = async (req, res) => {
+  User.findOne({ 
+    username: req.body.username
+  })
+  .exec((err,user) => {
+    if(err){
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    if(!user){
+      return res.status(404).send({ message: "User Not found." });
+    }
+
+    var passwordIsValid = bcrypt.compareSync(
+      req.body.password,
+      user.password
+    );
+
+    if (!passwordIsValid) {
+      return res.status(401).send({
+        accessToken: null,
+        message: "Invalid Password!"
+      });
+    }
+
+
+
+  })
+
   const user = User({
       id: req.body.id,
       email: req.body.email,
@@ -81,6 +110,13 @@ exports.loginUser = async (req, res) => {
   try {
       refreshTokens.push(refreshToken)
       res.json({user, accessToken: accessToken, refreshToken: refreshToken})
+      res.status(200).send({
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        roles: authorities,
+        accessToken: token
+      });
   } catch (err) {
    console.log(err.message);
    res.status(400).json({ message: err });
@@ -88,5 +124,5 @@ exports.loginUser = async (req, res) => {
 };
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+  return jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
 }
