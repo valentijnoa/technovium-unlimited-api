@@ -67,7 +67,6 @@ paths:
                     description: user results
                 403: 
                     description: 'You do not have necessary permissions for the resource'
-    
                 
     /users/signup:
         post:
@@ -164,6 +163,7 @@ paths:
     ##
     # user or creator can access and update his/her information
     ##
+
     /users/game/latestLocation/{user_id}:
         post:
             summary: Add latest user location
@@ -212,8 +212,6 @@ paths:
                     description: recieved
                 403: 
                     description: 'You do not have necessary permissions for the resource'
-
-
     ##
     # user or creator can access and update his/her information
     ##
@@ -297,8 +295,6 @@ paths:
                     description: score updated to started
                 403: 
                     description: 'You do not have necessary permissions for the resource'
-
-    
     /games:
         get:
             summary: Get all games
@@ -335,11 +331,11 @@ paths:
                     description: recieved 
     /levels:
         get:
-            summary: Get all levels of the game
-            description: Get all levels of the game
-            operationId: getAllLevelsOfGame
+            summary: Get all levels
+            description: Get all levels
+            operationId: getAllLevels
             requestBody:
-                description: Get all levels of one game
+                description: Get all levels
                 content:
                     'application/json':
                         schema:
