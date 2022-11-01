@@ -94,8 +94,6 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-
-
   })
 
   const user = User({
@@ -104,8 +102,8 @@ exports.loginUser = async (req, res) => {
       password: req.body.password
     });
 
-    const accessToken = generateAccessToken(user)
-    const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+  const accessToken = generateAccessToken(user)
+  const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
 
   try {
       refreshTokens.push(refreshToken)
@@ -114,7 +112,6 @@ exports.loginUser = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
-        roles: authorities,
         accessToken: token
       });
   } catch (err) {
